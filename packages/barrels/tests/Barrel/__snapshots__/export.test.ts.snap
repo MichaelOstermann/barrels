@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Barrel.export > should create appropiate exports for all sources 1`] = `
+"export * from "./packages/barrels/tests/__fixtures__/exports.ts";
+export { default } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { default } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export { default as foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { default as foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export * from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type * from "./packages/barrels/tests/__fixtures__/exports.ts";
+export * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";"
+`;

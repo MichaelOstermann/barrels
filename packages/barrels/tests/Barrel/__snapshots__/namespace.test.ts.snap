@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Barrel.namespace > should create a namespace barrel with flat types 1`] = `
+"import _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import * as _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { default as foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo as Foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+
+export namespace Foo {
+    export const bar = _bar;
+    export const foo = _foo;
+    export const foo = _foo;
+    export const foo = _foo;
+}"
+`;
+
+exports[`Barrel.namespace > should create a namespace barrel with merged types 1`] = `
+"import type _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { foo as _foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type * as _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import * as _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo as Foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+
+export namespace Foo {
+    export type foo = _foo;
+    export type foo = _foo;
+    export type foo = _foo;
+    export const bar = _bar;
+    export const foo = _foo;
+    export const foo = _foo;
+    export const foo = _foo;
+}"
+`;
+
+exports[`Barrel.namespace > should create a namespace barrel with nested types 1`] = `
+"import type _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { foo as _foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { foo as _Foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type * as _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as _foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import * as _foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+
+export namespace Foo {
+    export type foo = _foo;
+    export type foo = _foo;
+    export type foo = _foo;
+    export type Foo = _Foo;
+    export const bar = _bar;
+    export const foo = _foo;
+    export const foo = _foo;
+    export const foo = _foo;
+}"
+`;

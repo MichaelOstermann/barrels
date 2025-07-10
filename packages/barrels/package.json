@@ -1,0 +1,55 @@
+{
+    "name": "@monstermann/barrels",
+    "type": "module",
+    "version": "0.0.0",
+    "description": "Tools for managing barrel files.",
+    "author": "Michael Ostermann <michaelostermann@me.com>",
+    "license": "MIT",
+    "homepage": "https://MichaelOstermann.github.io/barrels",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MichaelOstermann/barrels.git"
+    },
+    "bugs": {
+        "url": "https://github.com/MichaelOstermann/barrels/issues"
+    },
+    "keywords": [],
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "bin": {
+        "barrels": "./dist/cli.js"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "bundle": "tsdown",
+        "release": "bun publish --access public"
+    },
+    "dependencies": {
+        "@henrygd/queue": "^1.0.7",
+        "@types/node": "^24.0.13",
+        "chokidar": "^4.0.3",
+        "gunshi": "^0.27.0-alpha.8",
+        "ignore": "^7.0.5",
+        "oxc-parser": "^0.76.0",
+        "oxc-resolver": "^11.5.2",
+        "oxc-walker": "^0.3.0",
+        "picocolors": "^1.1.1",
+        "tinyglobby": "^0.2.14",
+        "tsconfck": "^3.1.6",
+        "unconfig": "^7.3.2",
+        "unplugin-utils": "^0.2.4"
+    },
+    "devDependencies": {
+        "vitest": "^3.2.4"
+    }
+}

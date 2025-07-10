@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Barrel.import > should create appropiate imports for all sources 1`] = `
+"
+
+
+import foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+
+
+import * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";"
+`;

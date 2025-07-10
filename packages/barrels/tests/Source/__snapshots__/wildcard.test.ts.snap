@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Source.wildcard > should create a type wildcard import source 1`] = `Promise {}`;
+
+exports[`Source.wildcard > should create a type wildcard import source with alias 1`] = `Promise {}`;
+
+exports[`Source.wildcard > should create a wildcard import source 1`] = `Promise {}`;
+
+exports[`Source.wildcard > should create a wildcard import source with alias 1`] = `Promise {}`;

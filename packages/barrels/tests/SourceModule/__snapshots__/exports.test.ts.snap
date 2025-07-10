@@ -1,0 +1,421 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SourceModule.exports > should retrieve exports deeply 1`] = `
+[
+  {
+    "identifier": "",
+    "isType": false,
+    "type": "Default",
+  },
+  {
+    "identifier": "A",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "B",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "C",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "D",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "E",
+    "isType": true,
+    "type": "Named",
+  },
+  {
+    "identifier": "F",
+    "isType": true,
+    "type": "Named",
+  },
+]
+`;
+
+exports[`SourceModule.exports > should retrieve exports deeply from external module 1`] = `
+[
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "find",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find-all.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find-all.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "findAll",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./to-json.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/to-json.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "toJson",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "parse",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckParseError",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "findNative",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "parseNative",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckParseNativeError",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./cache.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/cache.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckCache",
+    "isType": false,
+    "type": "Named",
+  },
+]
+`;
+
+exports[`SourceModule.exports > should retrieve exports deeply from wildcard re-export 1`] = `
+[
+  {
+    "identifier": "",
+    "isType": false,
+    "type": "Default",
+  },
+  {
+    "identifier": "A",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "B",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "C",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "D",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "E",
+    "isType": true,
+    "type": "Named",
+  },
+  {
+    "identifier": "F",
+    "isType": true,
+    "type": "Named",
+  },
+]
+`;
+
+exports[`SourceModule.exports > should retrieve exports shallowly 1`] = `
+[
+  {
+    "identifier": "",
+    "isType": false,
+    "type": "Default",
+  },
+  {
+    "identifier": "A",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "B",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "C",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "D",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "identifier": "E",
+    "isType": true,
+    "type": "Named",
+  },
+  {
+    "identifier": "F",
+    "isType": true,
+    "type": "Named",
+  },
+]
+`;
+
+exports[`SourceModule.exports > should retrieve exports shallowly from external module 1`] = `
+[
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "find",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find-all.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find-all.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "findAll",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./to-json.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/to-json.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "toJson",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "parse",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckParseError",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./find-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "findNative",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "parseNative",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./parse-native.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/parse-native.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckParseNativeError",
+    "isType": false,
+    "type": "Named",
+  },
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+      "extName": "js",
+      "fileName": "./cache.js",
+      "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/cache.js",
+      "isExternal": true,
+      "moduleResolution": undefined,
+      "tsconfigPath": "",
+    },
+    "identifier": "TSConfckCache",
+    "isType": false,
+    "type": "Named",
+  },
+]
+`;
+
+exports[`SourceModule.exports > should retrieve exports shallowly from wildcard re-export 1`] = `
+[
+  {
+    "from": {
+      "allowImportingTsExtensions": undefined,
+      "dirPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__",
+      "extName": "ts",
+      "fileName": "exports",
+      "filePath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
+      "isExternal": false,
+      "moduleResolution": "bundler",
+      "tsconfigPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
+    },
+    "identifier": "",
+    "isType": false,
+    "type": "Wildcard",
+  },
+]
+`;

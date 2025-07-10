@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Barrel.flat > should create a record barrel 1`] = `
+"import { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { default as foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type { foo as bar } from "./packages/barrels/tests/__fixtures__/exports.ts";
+export type * as foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+
+export const Foo = {
+    bar,
+    foo,
+    foo,
+    foo,
+}"
+`;
