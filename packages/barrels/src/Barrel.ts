@@ -208,8 +208,8 @@ export const Barrel = {
         const typeImports = candidates
             .filter(source => Source.isTypeImport(source))
             .filter((source) => {
-                if (types === "flat") return false
                 if (types === "nested") return true
+                if (types === "merge") return true
                 return options.name === Source.importName(source)
             })
             .map(source => Source.setImportAlias(source, `_${Source.importName(source)}`))
@@ -227,8 +227,8 @@ export const Barrel = {
         const typeReExports = candidates
             .filter(source => Source.isTypeImport(source))
             .filter((source) => {
-                if (types === "flat") return true
                 if (types === "nested") return false
+                if (types === "merge") return false
                 return options.name !== Source.importName(source)
             })
             .map(source => Barrel.export(source))

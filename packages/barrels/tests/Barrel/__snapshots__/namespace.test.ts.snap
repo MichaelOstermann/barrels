@@ -1,14 +1,14 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Barrel.namespace > should create a namespace barrel with flat types 1`] = `
-"import _A from "./packages/barrels/tests/__fixtures__/exports.ts";
+"import type _Foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import _A from "./packages/barrels/tests/__fixtures__/exports.ts";
 import { C as _C } from "./packages/barrels/tests/__fixtures__/exports.ts";
 import { E as _F } from "./packages/barrels/tests/__fixtures__/exports.ts";
 import * as _I from "./packages/barrels/tests/__fixtures__/exports.ts";
 
 export type { D } from "./packages/barrels/tests/__fixtures__/exports.ts";
 export type { default as B } from "./packages/barrels/tests/__fixtures__/exports.ts";
-export type { default as Foo } from "./packages/barrels/tests/__fixtures__/exports.ts";
 export type { G as H } from "./packages/barrels/tests/__fixtures__/exports.ts";
 export type * as J from "./packages/barrels/tests/__fixtures__/exports.ts";
 export type Foo = _Foo;
@@ -22,16 +22,16 @@ export namespace Foo {
 `;
 
 exports[`Barrel.namespace > should create a namespace barrel with merged types 1`] = `
-"import type _Foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+"import type _B from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type _Foo from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { D as _D } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type { G as _H } from "./packages/barrels/tests/__fixtures__/exports.ts";
+import type * as _J from "./packages/barrels/tests/__fixtures__/exports.ts";
 import _A from "./packages/barrels/tests/__fixtures__/exports.ts";
 import { C as _C } from "./packages/barrels/tests/__fixtures__/exports.ts";
 import { E as _F } from "./packages/barrels/tests/__fixtures__/exports.ts";
 import * as _I from "./packages/barrels/tests/__fixtures__/exports.ts";
 
-export type { D } from "./packages/barrels/tests/__fixtures__/exports.ts";
-export type { default as B } from "./packages/barrels/tests/__fixtures__/exports.ts";
-export type { G as H } from "./packages/barrels/tests/__fixtures__/exports.ts";
-export type * as J from "./packages/barrels/tests/__fixtures__/exports.ts";
 export type Foo = _Foo;
 
 export namespace Foo {
