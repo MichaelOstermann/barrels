@@ -5,7 +5,9 @@
     "scripts": {
         "barrels": "barrels create -d ./packages/barrels/src -f '*.ts'",
         "checks": "bun run eslint && bun run tsc && bun run vitest run --passWithNoTests",
-        "release": "bun run checks && bun run bumpp -r --no-push && bun run -F '*' bundle && bun run -F '*' release",
+        "bundles": "bun run -F '*' bundle",
+        "bump": "bun run bumpp -r --no-push",
+        "release": "bun run checks && bun run bundles && bun run bump && bun run -F '*' release",
         "docs": "vitepress dev docs --open",
         "docs:build": "vitepress build docs"
     },
