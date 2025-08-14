@@ -8,18 +8,18 @@ describe("Barrel.flat", () => {
 
             await Source.default("./packages/barrels/tests/__fixtures__/exports.ts"),
             await Source.default("./packages/barrels/tests/__fixtures__/exports.ts", { type: true }),
-            await Source.default("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "foo" }),
-            await Source.default("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "foo", type: true }),
+            await Source.default("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "A" }),
+            await Source.default("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "B", type: true }),
 
-            await Source.named("foo", "./packages/barrels/tests/__fixtures__/exports.ts"),
-            await Source.named("foo", "./packages/barrels/tests/__fixtures__/exports.ts", { type: true }),
-            await Source.named("foo", "./packages/barrels/tests/__fixtures__/exports.ts", { alias: "bar" }),
-            await Source.named("foo", "./packages/barrels/tests/__fixtures__/exports.ts", { alias: "bar", type: true }),
+            await Source.named("C", "./packages/barrels/tests/__fixtures__/exports.ts"),
+            await Source.named("D", "./packages/barrels/tests/__fixtures__/exports.ts", { type: true }),
+            await Source.named("E", "./packages/barrels/tests/__fixtures__/exports.ts", { alias: "F" }),
+            await Source.named("G", "./packages/barrels/tests/__fixtures__/exports.ts", { alias: "H", type: true }),
 
             await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts"),
             await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts", { type: true }),
-            await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "foo" }),
-            await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "foo", type: true }),
+            await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "I" }),
+            await Source.wildcard("./packages/barrels/tests/__fixtures__/exports.ts", { alias: "J", type: true }),
         ]
         expect(Barrel.flat(sources as Source[])).toMatchSnapshot()
     })

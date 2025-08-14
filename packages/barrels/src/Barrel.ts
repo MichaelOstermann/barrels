@@ -210,7 +210,7 @@ export const Barrel = {
             .filter((source) => {
                 if (types === "flat") return false
                 if (types === "nested") return true
-                return options.name !== Source.importName(source)
+                return options.name === Source.importName(source)
             })
             .map(source => Source.setImportAlias(source, `_${Source.importName(source)}`))
             .map(source => Barrel.import(source))
@@ -224,20 +224,35 @@ export const Barrel = {
             .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
 
-        const typeExportsFlat = candidates
+        const typeReExports = candidates
             .filter(source => Source.isTypeImport(source))
             .filter((source) => {
                 if (types === "flat") return true
                 if (types === "nested") return false
-                return options.name === Source.importName(source)
+                return options.name !== Source.importName(source)
             })
             .map(source => Barrel.export(source))
             .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
 
-        const header = [typeImports, valueImports, typeExportsFlat]
-            .filter(Boolean)
+        const typeExports = candidates
+            .filter(source => Source.isTypeImport(source))
+            .filter((source) => {
+                if (types === "nested") return false
+                return options.name === Source.importName(source)
+            })
+            .map(source => Barrel.constExport({
+                name: Source.importName(source),
+                type: true,
+                value: `_${Source.importName(source)}`,
+            }))
+            .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
+
+        const header = [
+            [typeImports, valueImports].filter(Boolean).join("\n"),
+            [typeReExports, typeExports].filter(Boolean).join("\n"),
+        ].filter(Boolean).join("\n\n")
 
         const typeExportsNested = candidates
             .filter(source => Source.isTypeImport(source))
@@ -286,21 +301,42 @@ export const Barrel = {
         const candidates = sources.filter(source => Source.importName(source))
         const indentation = " ".repeat(options.indentation ?? 4)
 
+        const typeImports = candidates
+            .filter(source => Source.isTypeImport(source))
+            .filter(source => options.name === Source.importName(source))
+            .map(source => Source.setImportAlias(source, `_${Source.importName(source)}`))
+            .map(source => Barrel.import(source))
+            .sort((a, b) => a.localeCompare(b, "en-US"))
+            .join("\n")
+
         const valueImports = candidates
             .filter(source => !Source.isTypeImport(source))
             .map(source => Barrel.import(source))
             .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
 
-        const typeExports = candidates
+        const typeReExports = candidates
             .filter(source => Source.isTypeImport(source))
+            .filter(source => options.name !== Source.importName(source))
             .map(source => Barrel.export(source))
             .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
 
-        const header = [valueImports, typeExports]
-            .filter(Boolean)
+        const typeExports = candidates
+            .filter(source => Source.isTypeImport(source))
+            .filter(source => options.name === Source.importName(source))
+            .map(source => Barrel.constExport({
+                name: Source.importName(source),
+                type: true,
+                value: `_${Source.importName(source)}`,
+            }))
+            .sort((a, b) => a.localeCompare(b, "en-US"))
             .join("\n")
+
+        const header = [
+            [typeImports, valueImports].filter(Boolean).join("\n"),
+            [typeReExports, typeExports].filter(Boolean).join("\n"),
+        ].filter(Boolean).join("\n\n")
 
         const props = candidates
             .filter(source => !Source.isTypeImport(source))

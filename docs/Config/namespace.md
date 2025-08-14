@@ -105,9 +105,11 @@ export namespace Foo {
 Using this option will result with all type exports being re-exported as-is, including only values in the namespace.
 
 ```ts
-export type { Foo } from "./foo";
+import type { Foo as _Foo } from "./foo";
+
 export type { Bar } from "./bar";
 export type { Baz } from "./baz";
+export type Foo = _Foo;
 
 export namespace Foo {}
 ```
@@ -119,9 +121,11 @@ While this might look like a conflict, TypeScript is smart in figuring out wheth
 A mixture between `nested` and `flat` - Using this option will result with type exports that have the same name as the namespace being re-exported as-is, and all others are included in the namespace.
 
 ```ts
-export type { Foo } from "./foo";
+import type { Foo as _Foo } from "./foo";
 import type { Bar as _Bar } from "./bar";
 import type { Baz as _Baz } from "./baz";
+
+export type Foo = _Foo;
 
 export namespace Foo {
     export type Bar = _Bar;
