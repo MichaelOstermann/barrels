@@ -37,7 +37,7 @@ function resolveBarrelBody(
     }
 
     if (config.type === "record") {
-        return Barrel.namespace(sources, {
+        return Barrel.record(sources, {
             indentation: config.indentation,
             name: resolveBarrelName(output, config),
         })
