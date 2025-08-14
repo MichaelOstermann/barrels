@@ -140,7 +140,6 @@ export default defineConfig([
         type: "flat",
         directories: "./src/utils/*",
         files: "*.ts",
-        removeExtensions: true,
     },
 ]);
 ```

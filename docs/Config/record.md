@@ -37,7 +37,6 @@ export default defineConfig([
         name: "Barrel",
         files: "./src/utils/*.ts",
         output: "./src/utils/index.ts",
-        removeExtensions: true,
     },
 ]);
 ```

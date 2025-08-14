@@ -34,7 +34,6 @@ export default defineConfig([
         type: "flat",
         files: "./src/utils/*.ts",
         output: "./src/utils/index.ts",
-        removeExtensions: true,
     },
 ]);
 ```

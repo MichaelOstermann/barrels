@@ -154,16 +154,6 @@ export default defineConfig([
 ]);
 ```
 
-### removeExtensions
-
-```ts
-interface Config {
-    removeExtensions?: boolean;
-}
-```
-
-This allows you to remove all extensions, useful when `tsconfig.compilerOptions.moduleResolution` is set to `bundler`.
-
 ### resolveExports
 
 ```ts
