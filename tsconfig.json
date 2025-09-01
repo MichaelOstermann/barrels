@@ -4,6 +4,9 @@
         "lib": ["DOM", "DOM.Iterable", "ES2023"],
         "module": "ESNext",
         "moduleResolution": "bundler",
+        "paths": {
+            "@monstermann/barrels": ["./packages/barrels/src/index.ts"]
+        },
         "noEmit": true
     },
     "exclude": [

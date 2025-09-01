@@ -4,7 +4,7 @@
 function Source.importPath(source: Source): string
 ```
 
-Returns the path the given `source` should be imported with, considering the location set via [`Source.importFrom`](./importFrom), modified extensions via [`Source.removeExtension`](./removeExtension) or [`Source.remapExtension`](./remapExtension), etc.
+Returns the path the given `source` should be imported from, considering the location set via [`Source.importFrom`](./importFrom), modified extensions via [`Source.removeExtension`](./removeExtension) or [`Source.remapExtension`](./remapExtension), etc.
 
 ## Example
 

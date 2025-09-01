@@ -3,11 +3,9 @@
     "private": true,
     "workspaces": ["packages/*"],
     "scripts": {
-        "barrels": "barrels create -d ./packages/barrels/src -f '*.ts'",
         "checks": "bun run eslint && bun run tsc && bun run vitest run --passWithNoTests",
         "bundles": "bun run -F '*' bundle",
-        "bump": "bun run bumpp -r --no-push",
-        "release": "bun run checks && bun run bundles && bun run bump && bun run -F '*' release",
+        "release": "bun run scripts/release",
         "docs": "vitepress dev docs --open",
         "docs:build": "vitepress build docs"
     },
@@ -15,7 +13,7 @@
         "@monstermann/eslint-config": "^0.4.0",
         "@monstermann/vitepress-theme": "^0.2.0",
         "@sindresorhus/tsconfig": "^7.0.0",
-        "bumpp": "^10.2.0",
+        "prompts": "^2.4.2",
         "tsdown": "0.12.8",
         "typescript": "^5.8.3",
         "vitepress": "^1.6.3",

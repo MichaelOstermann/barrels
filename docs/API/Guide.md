@@ -4,37 +4,31 @@ aside: true
 
 # Guide
 
-While this library offers a few presets, it also offers an API that should allow you to build whatever you may need.
-
 ## Example
 
 ```ts [barrels.config.ts]
-import { defineConfig, Source, Barrel } from "@monstermann/barrels";
+import { defineConfig, Source, Sources, Barrel } from "@monstermann/barrels";
 
 export default defineConfig([
     async () => {
-        const barrelPath = "./index.ts";
+        // Retrieve a list of files:
+        const filepaths = Barrel.globFiles("./*.ts");
 
-        // Use Source.* to collect things such as files:
+        // Convert paths to sources:
+        const sources = await Sources.files(filepaths);
 
-        const files = await Source.files("./utils/*.ts");
-        const exports = await Source.exports(files);
+        // Optionally extract their export declarations:
+        const exports = await Sources.exports(sources);
 
-        // Use Source.* to process them:
+        // Use Source.* or Sources.* utilities to further manipulate sources:
+        const a = Sources.importFrom(exports, "./index.ts");
+        const b = Sources.removeExtensions(a);
 
-        const sources = exports
-            .map((source) => Source.importFrom(source, barrelPath))
-            .map((source) => Source.removeExtension(source));
-
-        // Use Barrel.* to create barrel file contents:
-
-        const barrel = sources
-            .map((source) => Barrel.export(source))
-            .join("\n");
+        // Convert sources to strings - you can do whatever you'd like:
+        const barrel = Sources.toExports(b);
 
         // Create the barrel file:
-
-        await Barrel.write(barrelPath, barrel);
+        await Barrel.write("./index.ts", barrel);
     },
 ]);
 ```
@@ -59,9 +53,7 @@ interface Source {
 }
 ```
 
-A `Source` describes a single export declaration source when building re-exports, which can be a file such as when using [`Source.file(path)`](./Source/file) or [`Source.files(pattern)`](./Source/files), but can also represent a single export extracted from files, see [`SourceExport`](#sourceexport).
-
-This is the primary structure this library is dealing with, you can find some utility functions in `Source.*` to create them or modify them.
+A `Source` describes a single export declaration source when building re-exports, which can be a file such as when using [`Source.file(path)`](./Source/file), but can also represent a single export extracted from files, see [`SourceExport`](#sourceexport).
 
 ## SourceModule
 
@@ -108,15 +100,13 @@ interface SourceExport {
 
 Typically you would start collecting files as sources, for example via [`Source.file(path)`](./Source/file).
 
-For some scenarios, such as building [namespace](../Config/namespace) barrels it is necessary to read the files and extract all their export declarations via [`Source.exports(source)`](./Source/exports) or [`SourceModule.exports(module)`](./SourceModule/exports) - the above is the data that is collected when collecting export declarations from files.
+For some scenarios, such as building namespace barrels it is necessary to read the files and extract all their export declarations via [`Source.exports(source)`](./Source/exports) or [`SourceModule.exports(module)`](./SourceModule/exports) - the above is the data that is collected when collecting export declarations from files.
 
 If the behavior is insufficient, you can inspect the ASTs of files yourself via [`Source.walkAst`](./Source/walkAst) or [`SourceModule.walkAst`](./SourceModule/walkAst).
 
 ## Barrel
 
-The `Barrel.*` utilities contain some optional functions to take `Source`s and convert them to strings, such as import or export declarations.
-
-There are just two important functions to take note of:
+`Barrel.*` contain misc utilities, most notably:
 
 - [`Barrel.write`](./Barrel/write) - To write barrel file contents to disk
 - [`Barrel.watch`](./Barrel/watch) - To track dependencies and rebuild barrels only when necessary

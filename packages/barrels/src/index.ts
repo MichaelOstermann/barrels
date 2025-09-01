@@ -7,5 +7,6 @@
 export * from "./Barrel";
 export * from "./defineConfig";
 export * from "./Source";
+export * from "./Sources";
 export * from "./SourceModule";
 export * from "./types";

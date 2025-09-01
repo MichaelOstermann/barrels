@@ -1,5 +1,5 @@
 {
-    "name": "@monstermann/barrels",
+    "name": "@monstermann/barrels-flat",
     "type": "module",
     "version": "0.1.1",
     "description": "Tools for creating barrel files.",
@@ -24,9 +24,6 @@
     "main": "./dist/index.js",
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
-    "bin": {
-        "barrels": "./dist/cli.js"
-    },
     "files": [
         "dist"
     ],
@@ -35,21 +32,8 @@
         "release": "bun publish --access public"
     },
     "dependencies": {
-        "@henrygd/queue": "^1.0.7",
-        "@types/node": "^24.0.13",
-        "chokidar": "^4.0.3",
-        "gunshi": "^0.27.0-alpha.8",
-        "ignore": "^7.0.5",
-        "oxc-parser": "^0.76.0",
-        "oxc-resolver": "^11.5.2",
-        "oxc-walker": "^0.3.0",
-        "picocolors": "^1.1.1",
-        "tinyglobby": "^0.2.14",
-        "tsconfck": "^3.1.6",
-        "unconfig": "^7.3.2",
+        "@monstermann/barrels": "workspace:*",
+        "@monstermann/dfdl": "^0.1.0",
         "unplugin-utils": "^0.2.4"
-    },
-    "devDependencies": {
-        "vitest": "^3.2.4"
     }
 }

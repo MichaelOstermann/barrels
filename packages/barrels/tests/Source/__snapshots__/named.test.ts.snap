@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`Source.named > should create a named import source 1`] = `Promise {}`;
-
-exports[`Source.named > should create a named import source with alias 1`] = `Promise {}`;
-
-exports[`Source.named > should create a type named import source 1`] = `Promise {}`;
-
-exports[`Source.named > should create a type named import source with alias 1`] = `Promise {}`;

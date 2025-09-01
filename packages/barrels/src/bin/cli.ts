@@ -9,7 +9,6 @@ import ignore from "ignore"
 import pc from "picocolors"
 import { loadConfig } from "unconfig"
 import { Barrel } from "../Barrel"
-import { defineConfig } from "../defineConfig"
 
 const { version } = JSON.parse(
     readFileSync(new URL("../package.json", import.meta.url)).toString(),
@@ -53,130 +52,6 @@ const runCommand = define({
                     // eslint-disable-next-line no-console
                     console.log(pc.yellow(`File changed: ${path}`))
                     output = await queue.add(config.exec)
-                    printOutput(output)
-                }
-            })
-        }
-    },
-})
-
-const createCommand = define({
-    name: "create",
-    toKebab: true,
-    args: {
-        banner: {
-            description: "Custom banner text",
-            short: "b",
-            type: "string",
-        },
-        directories: {
-            description: "Paths or globs to directories (default: $PWD)",
-            multiple: true,
-            short: "d",
-            type: "string",
-        },
-        exclude: {
-            description: "Glob patterns to filter files",
-            multiple: true,
-            short: "e",
-            type: "string",
-        },
-        extensions: {
-            default: "auto",
-            description: "Extension handling: auto, remove, or ts:js,tsx:jsx,…",
-            short: "X",
-            type: "custom",
-            parse(value) {
-                if (value === "auto") return "auto"
-                if (value === "remove") return false
-                const mapping = value
-                    .split(",")
-                    .map(str => str.trim())
-                    .map(str => str.split(":"))
-                    .reduce((acc, [key, value]) => {
-                        if (!key) return acc
-                        acc[key] = value || ""
-                        return acc
-                    }, {} as Record<string, string>)
-                return Object.keys(mapping).length ? mapping : undefined
-            },
-        },
-        files: {
-            description: "Paths or globs to include files from",
-            multiple: true,
-            required: true,
-            short: "f",
-            type: "string",
-        },
-        include: {
-            description: "Glob patterns to filter files",
-            multiple: true,
-            short: "i",
-            type: "string",
-        },
-        indentation: {
-            default: 4,
-            description: "Indentation spaces",
-            short: "I",
-            type: "number",
-        },
-        name: {
-            description: "Name for namespace/record barrels",
-            short: "n",
-            type: "string",
-        },
-        output: {
-            description: "Output file path (default: index.ts)",
-            short: "o",
-            type: "string",
-        },
-        resolveExports: {
-            description: "Extract individual exports instead of wildcards",
-            negatable: true,
-            short: "r",
-            type: "boolean",
-        },
-        type: {
-            default: "flat",
-            description: "Barrel type: flat, namespace, or record",
-            short: "t",
-            type: "custom",
-            parse(value): any {
-                if (["flat", "namespace", "record"].includes(value)) return value
-                throw new TypeError(`Invalid type option: ${value}. Must be one of flat | namespace | record`)
-            },
-        },
-        types: {
-            default: "flat",
-            description: "Type handling for namespace barrels: merge, nested, flat",
-            short: "T",
-            type: "custom",
-            parse(value): any {
-                if (["merge", "nested", "flat"].includes(value)) return value
-                throw new TypeError(`Invalid types option: ${value}. Must be one of merge | nested | flat`)
-            },
-        },
-        watch: {
-            default: false,
-            description: "Keep barrels up-to-date",
-            short: "w",
-            type: "boolean",
-        },
-    },
-    run: async (ctx) => {
-        const config = defineConfig([ctx.values])
-        const gitignore = await getGitIgnore()
-
-        const queue = newQueue(1)
-        let output = await queue.add(config)
-        printOutput(output)
-
-        if (ctx.values.watch) {
-            watch(gitignore, async (path: string) => {
-                if (Barrel.isWatching(output, path) && queue.size() < 2) {
-                    // eslint-disable-next-line no-console
-                    console.log(pc.yellow(`File changed: ${path}`))
-                    output = await queue.add(config)
                     printOutput(output)
                 }
             })
@@ -262,12 +137,7 @@ function watch(gitignore: ignore.Ignore, onFileEvent: (path: string) => void): v
         })
 }
 
-const subCommands = new Map()
-subCommands.set("run", runCommand)
-subCommands.set("create", createCommand)
-
 cli(process.argv.slice(2), runCommand, {
     name: "barrels",
-    subCommands,
     version,
 })

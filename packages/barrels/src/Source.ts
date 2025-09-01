@@ -1,9 +1,7 @@
 import type { Node } from "oxc-parser"
-import type { GlobOptions } from "tinyglobby"
 import type { FilterPattern } from "unplugin-utils"
 import type { SourceExport } from "./SourceModule"
 import Path from "node:path"
-import { glob } from "tinyglobby"
 import { Barrel } from "./Barrel"
 import { SourceModule } from "./SourceModule"
 
@@ -18,42 +16,23 @@ export interface Source {
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const Source = {
-    async default(path: string, options?: {
-        alias?: string
-        type?: boolean
-    }): Promise<Source | undefined> {
-        const module = await SourceModule.resolve(path)
-        if (!module) return
-
-        return {
-            alias: options?.alias ?? "",
-            dirPath: module.dirPath,
-            extName: module.extName,
-            isType: false,
-            module,
-            export: {
-                identifier: "",
-                isType: options?.type ?? false,
-                type: "Default",
-            },
-        }
+    asType(source: Source): Source {
+        return { ...source, isType: true }
     },
-    async exports(source: Source | readonly Source[]): Promise<readonly Source[]> {
-        if (isArray(source)) {
-            const exports = await Promise.all(source.map(source => Source.exports(source)))
-            return exports.flat(1)
-        }
-
+    asValue(source: Source): Source {
+        return { ...source, isType: false }
+    },
+    async exports(source: Source): Promise<Source[]> {
         if (source.alias) return [source]
 
         if (!source.export) {
             const exports = await SourceModule.exports(source.module, true)
-            return exports.map(ex => ({ ...source, export: ex }))
+            return exports.map(ex => ({ ...source, export: ex, isType: ex.isType }))
         }
 
         if (source.export.type === "Wildcard" && source.export.from && !source.alias) {
             const exports = await SourceModule.exports(source.export.from, true)
-            return exports.map(ex => ({ ...source, export: ex }))
+            return exports.map(ex => ({ ...source, export: ex, isType: ex.isType }))
         }
 
         return [source]
@@ -62,6 +41,8 @@ export const Source = {
         alias?: string
         type?: boolean
     }): Promise<Source | undefined> {
+        Barrel.watch(path)
+
         const module = await SourceModule.resolve(path)
             ?? await SourceModule.resolve(Path.resolve(path))
 
@@ -75,20 +56,7 @@ export const Source = {
             module,
         }
     },
-    async files(
-        pattern: string | string[],
-        options?: Omit<GlobOptions, "absolute" | "patterns" | "onlyFiles" | "onlyDirectories">,
-    ): Promise<Source[]> {
-        Barrel.watch(pattern, options?.cwd)
-        const files = await glob(pattern, {
-            ...options,
-            absolute: true,
-            onlyFiles: true,
-        })
-        const sources = await Promise.all(files.map(path => Source.file(path)))
-        return sources.filter(source => !!source)
-    },
-    importFrom<T extends Source>(source: T, filePath: string): T {
+    importFrom(source: Source, filePath: string): Source {
         if (source.module.isExternal) return source
         filePath = Path.resolve(filePath)
         const fromDir = Path.dirname(Path.resolve(filePath))
@@ -104,9 +72,6 @@ export const Source = {
         if (source.module.isExternal)
             return source.module.fileName
 
-        if (Path.isAbsolute(source.dirPath))
-            source = Source.importFrom(source, "./index.ts")
-
         const extName = source.extName ? `.${source.extName}` : ""
 
         return [
@@ -116,51 +81,111 @@ export const Source = {
             .filter(Boolean)
             .join(Path.sep)
     },
-    isTypeExport(source: Source): boolean {
-        return source.export?.isType ?? false
-    },
-    isTypeImport(source: Source): boolean {
-        return source.export?.isType ?? source.isType
+    isType(source: Source): boolean {
+        return source.isType
     },
     matches(source: Source, pattern: Exclude<FilterPattern, null>): boolean {
         return SourceModule.matches(source.module, pattern)
     },
-    async named(name: string, path: string, options?: {
-        alias?: string
-        type?: boolean
-    }): Promise<Source | undefined> {
-        const module = await SourceModule.resolve(path)
-        if (!module) return
-
-        return {
-            alias: options?.alias ?? "",
-            dirPath: module.dirPath,
-            extName: module.extName,
-            isType: false,
-            module,
-            export: {
-                identifier: name,
-                isType: options?.type ?? false,
-                type: "Named",
-            },
-        }
-    },
-    remapExtension<T extends Source>(source: T, mapping: Record<string, string>): T {
+    remapExtension(source: Source, mapping: Record<string, string>): Source {
         if (source.module.isExternal) return source
         if (!source.extName) return source
         if (!(source.extName in mapping)) return source
         const extName = mapping[source.extName] || ""
         return { ...source, extName }
     },
-    removeExtension<T extends Source>(source: T): T {
+    removeExtension(source: Source): Source {
         if (source.module.isExternal) return source
         return { ...source, extName: "" }
     },
-    setImportAlias<T extends Source>(source: T, alias: string): T {
+    resolveExtension(source: Source): Source {
+        if (source.module.allowImportingTsExtensions)
+            return source
+
+        if (source.module.moduleResolution === "bundler")
+            return Source.removeExtension(source)
+
+        return Source.remapExtension(source, {
+            mts: "mjs",
+            mtsx: "mjsx",
+            ts: "js",
+            tsx: "jsx",
+        })
+    },
+    setAlias(source: Source, alias: string): Source {
         return { ...source, alias }
     },
-    toTypeImport<T extends Source>(source: T): T {
-        return { ...source, isType: true }
+    toExport(source: Source): string {
+        if (!source.export) {
+            return wildcardExport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Default") {
+            return defaultExport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Named") {
+            return namedExport({
+                alias: source.alias,
+                name: source.export.identifier,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Wildcard") {
+            return wildcardExport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        return ""
+    },
+    toImport(source: Source): string {
+        if (!source.export) {
+            return wildcardImport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Default") {
+            return defaultImport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Named") {
+            return namedImport({
+                alias: source.alias,
+                name: source.export.identifier,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        if (source.export.type === "Wildcard") {
+            return wildcardImport({
+                alias: source.alias,
+                path: Source.importPath(source),
+                type: Source.isType(source),
+            })
+        }
+
+        return ""
     },
     walkAst(source: Source, options: {
         enter: (node: Node) => void | Promise<void>
@@ -168,28 +193,116 @@ export const Source = {
     }): Promise<void> {
         return SourceModule.walkAst(source.module, options)
     },
-    async wildcard(path: string, options?: {
-        alias?: string
-        type?: boolean
-    }): Promise<Source | undefined> {
-        const module = await SourceModule.resolve(path)
-        if (!module) return
-
-        return {
-            alias: options?.alias ?? "",
-            dirPath: module.dirPath,
-            extName: module.extName,
-            isType: false,
-            module,
-            export: {
-                identifier: "",
-                isType: options?.type ?? false,
-                type: "Wildcard",
-            },
-        }
-    },
 }
 
-function isArray(value: unknown): value is readonly unknown[] {
-    return Array.isArray(value)
+function namedImport({ alias, name, path, type }: {
+    alias?: string
+    name: string
+    path: string
+    type?: boolean
+}): string {
+    if (!name || !path) return ""
+    return [
+        "import",
+        type ? "type" : "",
+        "{",
+        name,
+        alias ? `as ${alias}` : "",
+        "}",
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
+}
+
+function namedExport({ alias, name, path, type }: {
+    alias?: string
+    name: string
+    path: string
+    type?: boolean
+}): string {
+    if (!name || !path) return ""
+    return [
+        "export",
+        type ? "type" : "",
+        "{",
+        name,
+        alias ? `as ${alias}` : "",
+        "}",
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
+}
+
+function defaultImport({ alias, path, type }: {
+    alias: string
+    path: string
+    type?: boolean
+}): string {
+    if (!path || !alias) return ""
+    return [
+        "import",
+        type ? "type" : "",
+        alias,
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
+}
+
+function defaultExport({ alias, path, type }: {
+    alias?: string
+    path: string
+    type?: boolean
+}): string {
+    if (!path) return ""
+    return [
+        "export",
+        type ? "type" : "",
+        alias ? `{ default as ${alias} }` : "{ default }",
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
+}
+
+function wildcardImport({ alias, path, type }: {
+    alias: string
+    path: string
+    type?: boolean
+}): string {
+    if (!path || !alias) return ""
+    return [
+        "import",
+        type ? "type" : "",
+        "*",
+        alias ? `as ${alias}` : "",
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
+}
+
+function wildcardExport({ alias, path, type }: {
+    alias?: string
+    path: string
+    type?: boolean
+}): string {
+    if (!path) return ""
+    return [
+        "export",
+        type ? "type" : "",
+        "*",
+        alias ? `as ${alias}` : "",
+        "from",
+        `"${path}";`,
+    ]
+        .filter(Boolean)
+        .join(" ")
 }
