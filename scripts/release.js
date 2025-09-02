@@ -79,6 +79,7 @@ const { push } = await prompts({
 }, { onCancel })
 
 if (push) {
+    await $`git push`
     await $`git push --tags`
 }
 
