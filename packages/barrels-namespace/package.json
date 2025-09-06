@@ -1,7 +1,7 @@
 {
     "name": "@monstermann/barrels-namespace",
     "type": "module",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Tools for creating barrel files.",
     "author": "Michael Ostermann <michaelostermann@me.com>",
     "license": "MIT",
