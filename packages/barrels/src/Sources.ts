@@ -49,6 +49,9 @@ export const Sources = {
     remapExtensions(sources: Source[], mapping: Record<string, string>): Source[] {
         return sources.map(source => Source.remapExtension(source, mapping))
     },
+    remapTsExtensions(sources: Source[]): Source[] {
+        return sources.map(source => Source.remapTsExtension(source))
+    },
     removeExtensions(sources: Source[]): Source[] {
         return sources.map(source => Source.removeExtension(source))
     },

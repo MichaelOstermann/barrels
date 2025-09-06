@@ -94,6 +94,14 @@ export const Source = {
         const extName = mapping[source.extName] || ""
         return { ...source, extName }
     },
+    remapTsExtension(source: Source): Source {
+        return Source.remapExtension(source, {
+            mts: "mjs",
+            mtsx: "mjsx",
+            ts: "js",
+            tsx: "jsx",
+        })
+    },
     removeExtension(source: Source): Source {
         if (source.module.isExternal) return source
         return { ...source, extName: "" }
@@ -105,12 +113,7 @@ export const Source = {
         if (source.module.moduleResolution === "bundler")
             return Source.removeExtension(source)
 
-        return Source.remapExtension(source, {
-            mts: "mjs",
-            mtsx: "mjsx",
-            ts: "js",
-            tsx: "jsx",
-        })
+        return Source.remapTsExtension(source)
     },
     setAlias(source: Source, alias: string): Source {
         return { ...source, alias }
