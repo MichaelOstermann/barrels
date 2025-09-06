@@ -1,8 +1,8 @@
-import type { Source } from "@monstermann/barrels"
 import type { FilterPattern } from "unplugin-utils"
 import Path from "node:path"
-import { Barrel, Sources } from "@monstermann/barrels"
+import { Barrel, Source, Sources } from "@monstermann/barrels"
 import { pipe } from "@monstermann/dfdl"
+import { embeds } from "./embed"
 
 export interface NamespaceBarrelConfig {
     /**
@@ -79,111 +79,120 @@ export function namespace(options: NamespaceBarrelConfig): () => Promise<void> {
             const sources = await Sources.files(files)
                 .then(sources => options.exclude ? Sources.exclude(sources, options.exclude) : sources)
                 .then(sources => Sources.exports(sources))
-                .then(sources => Sources.importFrom(sources, barrelPath))
 
             const namespaceName = getNamespaceTitle(title, barrelPath)
-            await Barrel.write(declarationPath, generateDeclaration(sources, namespaceName))
-            await Barrel.write(barrelPath, generateBarrel(sources, namespaceName))
+            await Barrel.write(declarationPath, await generateDeclaration(sources, namespaceName, barrelPath))
+            await Barrel.write(barrelPath, generateBarrel(sources, namespaceName, barrelPath))
         }))
     }
 }
 
-function generateDeclaration(
+async function generateDeclaration(
     sources: Source[],
     title: string,
-): string {
+    importPath: string,
+): Promise<string> {
     const padding = " ".repeat(4)
 
-    const modules = pipe(
+    const conflicts = pipe(
         sources,
         sources => Sources.filterNamed(sources),
-        sources => Sources.remapExtensions(sources, {
-            mts: "mjs",
-            mtsx: "mjsx",
-            ts: "js",
-            tsx: "jsx",
-        }),
+        sources => Sources.filterTypes(sources),
+        sources => sources.filter(source => Source.importName(source) === title),
     )
 
-    const imports = pipe(
-        modules,
-        modules => Sources.asValues(modules),
-        modules => Sources.toImports(modules),
+    const conflictedPaths = conflicts.map(source => source.module.filePath)
+    const embed = await embeds(conflicts)
+
+    const moduleImports = pipe(
+        sources,
+        sources => Sources.filterNamed(sources),
+        sources => sources.filter(source => !conflictedPaths.includes(source.module.filePath)),
+        sources => sources.concat(embed.imports),
+        sources => Sources.importFrom(sources, importPath),
+        sources => Sources.remapTsExtensions(sources),
+        sources => Sources.asValues(sources),
+        sources => Sources.toImports(sources),
+    )
+
+    const moduleExports = pipe(
+        sources,
+        sources => Sources.filterNamed(sources),
+        sources => Sources.filterTypes(sources),
+        sources => Sources.importNames(sources),
+        names => [title].concat(names),
+        names => Array.from(new Set(names)),
+        names => names.map(name => `${padding}${name},`),
+        names => names.join("\n"),
+        exports => `export {\n${exports}\n}`,
     )
 
     const namespaceExports = pipe(
-        modules,
-        modules => Sources.filterValues(modules),
-        modules => Sources.importNames(modules),
-        names => sort(names),
+        sources,
+        sources => Sources.filterNamed(sources),
+        sources => Sources.filterValues(sources),
+        sources => Sources.importNames(sources),
         names => names.map(name => `${padding.repeat(2)}${name},`),
         names => names.join("\n"),
     )
 
-    const moduleExports = pipe(
-        modules,
-        modules => Sources.filterTypes(modules),
-        modules => Sources.importNames(modules),
-        names => names.concat([title]),
-        names => uniq(names),
-        names => sort(names),
-        names => names.map(name => `${padding}${name},`),
-        names => names.join("\n"),
-    )
-
-    return [
-        Barrel.banner,
-        "",
-        imports,
-        "",
+    const namespace = [
         `declare namespace ${title} {`,
         `${padding}export {`,
         namespaceExports,
         `${padding}}`,
         "}",
-        "",
-        "export {",
-        moduleExports,
-        "}",
     ].join("\n")
+
+    return [
+        Barrel.banner,
+        moduleImports,
+        ...embed.contents,
+        namespace,
+        moduleExports,
+    ]
+        .filter(Boolean)
+        .join("\n\n")
 }
 
 function generateBarrel(
     sources: Source[],
     title: string,
+    importPath: string,
 ): string {
     const padding = " ".repeat(4)
 
-    const modules = pipe(
+    const imports = pipe(
         sources,
         sources => Sources.filterNamed(sources),
         sources => Sources.filterValues(sources),
-        sources => Sources.remapExtensions(sources, {
-            mts: "mjs",
-            mtsx: "mjsx",
-            ts: "js",
-            tsx: "jsx",
-        }),
+        sources => Sources.remapTsExtensions(sources),
+        sources => Sources.importFrom(sources, importPath),
+        sources => Sources.toImports(sources),
     )
 
-    const imports = Sources.toImports(modules)
-
     const properties = pipe(
-        modules,
-        modules => Sources.importNames(modules),
+        sources,
+        sources => Sources.filterNamed(sources),
+        sources => Sources.filterValues(sources),
+        sources => Sources.importNames(sources),
         names => names.map(name => `${padding}${name},`),
         names => names.join("\n"),
     )
 
-    return [
-        Barrel.banner,
-        "",
-        imports,
-        "",
+    const record = [
         `export const ${title} = {`,
         properties,
         "}",
     ].join("\n")
+
+    return [
+        Barrel.banner,
+        imports,
+        record,
+    ]
+        .filter(Boolean)
+        .join("\n\n")
 }
 
 function getNamespaceTitle(name: string | undefined, entry: string): string {
@@ -191,12 +200,4 @@ function getNamespaceTitle(name: string | undefined, entry: string): string {
     const filename = Path.basename(entry, Path.extname(entry))
     if (filename !== "index") return filename
     return Path.basename(Path.dirname(entry))
-}
-
-function uniq(list: string[]): string[] {
-    return Array.from(new Set(list))
-}
-
-function sort(list: string[]): string[] {
-    return list.sort((a, b) => a.localeCompare(b, "en-US"))
 }
