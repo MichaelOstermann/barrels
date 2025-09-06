@@ -41,6 +41,7 @@ export const Sources = {
             .from(new Set(sources.map(source => Source.importName(source))))
             .filter(name => name.trim())
             .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b, "en-US"))
     },
     include(sources: Source[], pattern: Exclude<FilterPattern, null>): Source[] {
         return sources.filter(source => Source.matches(source, pattern))
