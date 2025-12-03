@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "devDependencies": {
@@ -27,7 +28,7 @@
         "ignore": "^7.0.5",
         "oxc-parser": "^0.76.0",
         "oxc-resolver": "^11.5.2",
-        "oxc-walker": "^0.3.0",
+        "oxc-walker": "^0.6.0",
         "picocolors": "^1.1.1",
         "tinyglobby": "^0.2.14",
         "tsconfck": "^3.1.6",
@@ -53,7 +54,7 @@
       "dependencies": {
         "@monstermann/barrels": "workspace:*",
         "@monstermann/dfdl": "^0.1.0",
-        "oxc-walker": "^0.3.0",
+        "oxc-walker": "^0.6.0",
         "unplugin-utils": "^0.2.4",
       },
     },
@@ -1017,7 +1018,7 @@
 
     "oxc-resolver": ["oxc-resolver@11.5.2", "", { "dependencies": { "napi-postinstall": "^0.3.0" }, "optionalDependencies": { "@oxc-resolver/binding-android-arm-eabi": "11.5.2", "@oxc-resolver/binding-android-arm64": "11.5.2", "@oxc-resolver/binding-darwin-arm64": "11.5.2", "@oxc-resolver/binding-darwin-x64": "11.5.2", "@oxc-resolver/binding-freebsd-x64": "11.5.2", "@oxc-resolver/binding-linux-arm-gnueabihf": "11.5.2", "@oxc-resolver/binding-linux-arm-musleabihf": "11.5.2", "@oxc-resolver/binding-linux-arm64-gnu": "11.5.2", "@oxc-resolver/binding-linux-arm64-musl": "11.5.2", "@oxc-resolver/binding-linux-ppc64-gnu": "11.5.2", "@oxc-resolver/binding-linux-riscv64-gnu": "11.5.2", "@oxc-resolver/binding-linux-riscv64-musl": "11.5.2", "@oxc-resolver/binding-linux-s390x-gnu": "11.5.2", "@oxc-resolver/binding-linux-x64-gnu": "11.5.2", "@oxc-resolver/binding-linux-x64-musl": "11.5.2", "@oxc-resolver/binding-wasm32-wasi": "11.5.2", "@oxc-resolver/binding-win32-arm64-msvc": "11.5.2", "@oxc-resolver/binding-win32-ia32-msvc": "11.5.2", "@oxc-resolver/binding-win32-x64-msvc": "11.5.2" } }, "sha512-mYkOsrgvlm4OLPCgSR2XCMkJ203PwSOASxzHYzW7Kz3GXONVbe2VTpgwL/yBo0igSUwlZWTUKEbRJLscJ6N5QQ=="],
 
-    "oxc-walker": ["oxc-walker@0.3.0", "", { "dependencies": { "estree-walker": "^3.0.3", "magic-regexp": "^0.10.0" }, "peerDependencies": { "oxc-parser": ">=0.72.0" } }, "sha512-mGGgl9dmYHUX7Z3bxXhibwarI0fJVj2E64FNIOZQWUDvEeIPyJTe5ElyJmp4nmDdfdnrlG0bhdR+bR9D6DM/dA=="],
+    "oxc-walker": ["oxc-walker@0.6.0", "", { "dependencies": { "magic-regexp": "^0.10.0" }, "peerDependencies": { "oxc-parser": ">=0.98.0" } }, "sha512-BA3hlxq5+Sgzp7TCQF52XDXCK5mwoIZuIuxv/+JuuTzOs2RXkLqWZgZ69d8pJDDjnL7wiREZTWHBzFp/UWH88Q=="],
 
     "p-limit": ["p-limit@3.1.0", "", { "dependencies": { "yocto-queue": "^0.1.0" } }, "sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ=="],
 
