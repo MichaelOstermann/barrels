@@ -35,6 +35,6 @@
         "@monstermann/barrels": "workspace:*",
         "@monstermann/dfdl": "^0.1.0",
         "oxc-walker": "^0.6.0",
-        "unplugin-utils": "^0.2.4"
+        "unplugin-utils": "^0.3.0"
     }
 }
