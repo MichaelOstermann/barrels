@@ -4,7 +4,7 @@ import type { TSConfckParseResult } from "tsconfck"
 import type { FilterPattern } from "unplugin-utils"
 import { readFile } from "node:fs/promises"
 import Path from "node:path"
-import { parseAsync } from "oxc-parser"
+import { parse } from "oxc-parser"
 import { ResolverFactory } from "oxc-resolver"
 import { walk } from "oxc-walker"
 import { parse as parseTsConfig } from "tsconfck"
@@ -210,7 +210,7 @@ export const SourceModule = {
 
         const ast = await readFile(module.filePath, "utf8")
             .catch(() => "")
-            .then(contents => parseAsync(module.filePath, contents))
+            .then(contents => parse(module.filePath, contents))
             .then(ast => ast.program)
 
         walk(ast, {

@@ -16,7 +16,7 @@ export const Barrel = {
 // biome-ignore lint: disable`,
     async globDirectories(
         pattern: string | string[] | undefined,
-        options?: Omit<GlobOptions, "absolute" | "patterns" | "onlyFiles" | "onlyDirectories" | "expandDirectories">,
+        options?: Omit<GlobOptions, "absolute" | "patterns" | "onlyFiles" | "onlyDirectories" | "expandDirectories" | "cwd"> & { cwd?: string },
     ): Promise<string[]> {
         if (!pattern || !pattern.length) return [process.cwd()]
         Barrel.watch(pattern, options?.cwd)
@@ -30,7 +30,7 @@ export const Barrel = {
     },
     async globFiles(
         pattern: string | string[] | undefined,
-        options?: Omit<GlobOptions, "absolute" | "patterns" | "onlyFiles" | "onlyDirectories">,
+        options?: Omit<GlobOptions, "absolute" | "patterns" | "onlyFiles" | "onlyDirectories" | "cwd"> & { cwd?: string },
     ): Promise<string[]> {
         if (!pattern || !pattern.length) return []
         Barrel.watch(pattern, options?.cwd)

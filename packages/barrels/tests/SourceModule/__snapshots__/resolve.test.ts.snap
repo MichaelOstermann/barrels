@@ -5,36 +5,36 @@ exports[`SourceModule.resolve > should not resolve built-in modules 1`] = `undef
 exports[`SourceModule.resolve > should resolve external modules 1`] = `
 {
   "allowImportingTsExtensions": undefined,
-  "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+  "dirPath": "/home/michael/Development/barrels/node_modules/tsconfck/src",
   "extName": "js",
   "fileName": "tsconfck",
-  "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/index.js",
+  "filePath": "/home/michael/Development/barrels/node_modules/tsconfck/src/index.js",
   "isExternal": true,
   "moduleResolution": "bundler",
-  "tsconfigPath": "/Users/michael/Development/barrels/tsconfig.json",
+  "tsconfigPath": "/home/michael/Development/barrels/tsconfig.json",
 }
 `;
 
 exports[`SourceModule.resolve > should resolve local modules 1`] = `
 {
   "allowImportingTsExtensions": undefined,
-  "dirPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__",
+  "dirPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__",
   "extName": "ts",
   "fileName": "exports",
-  "filePath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
+  "filePath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
   "isExternal": false,
   "moduleResolution": "bundler",
-  "tsconfigPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
+  "tsconfigPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
 }
 `;
 
 exports[`SourceModule.resolve > should resolve relative external modules 1`] = `
 {
   "allowImportingTsExtensions": undefined,
-  "dirPath": "/Users/michael/Development/barrels/node_modules/tsconfck/src",
+  "dirPath": "/home/michael/Development/barrels/node_modules/tsconfck/src",
   "extName": "js",
   "fileName": "./find.js",
-  "filePath": "/Users/michael/Development/barrels/node_modules/tsconfck/src/find.js",
+  "filePath": "/home/michael/Development/barrels/node_modules/tsconfck/src/find.js",
   "isExternal": true,
   "moduleResolution": undefined,
   "tsconfigPath": "",
@@ -44,25 +44,25 @@ exports[`SourceModule.resolve > should resolve relative external modules 1`] = `
 exports[`SourceModule.resolve > should resolve relative local modules 1`] = `
 {
   "allowImportingTsExtensions": undefined,
-  "dirPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__",
+  "dirPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__",
   "extName": "ts",
   "fileName": "exports",
-  "filePath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
+  "filePath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
   "isExternal": false,
   "moduleResolution": "bundler",
-  "tsconfigPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
+  "tsconfigPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
 }
 `;
 
 exports[`SourceModule.resolve > should resolve tsconfig aliases 1`] = `
 {
   "allowImportingTsExtensions": undefined,
-  "dirPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__",
+  "dirPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__",
   "extName": "ts",
   "fileName": "exports",
-  "filePath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
+  "filePath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
   "isExternal": false,
   "moduleResolution": "bundler",
-  "tsconfigPath": "/Users/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
+  "tsconfigPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
 }
 `;
