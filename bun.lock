@@ -16,7 +16,7 @@
     },
     "packages/barrels": {
       "name": "@monstermann/barrels",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "bin": {
         "barrels": "./dist/cli.js",
       },
@@ -41,7 +41,7 @@
     },
     "packages/barrels-flat": {
       "name": "@monstermann/barrels-flat",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@monstermann/barrels": "workspace:*",
         "@monstermann/dfdl": "^0.1.0",
@@ -50,7 +50,7 @@
     },
     "packages/barrels-namespace": {
       "name": "@monstermann/barrels-namespace",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@monstermann/barrels": "workspace:*",
         "@monstermann/dfdl": "^0.1.0",
