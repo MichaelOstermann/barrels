@@ -6,7 +6,7 @@
       "devDependencies": {
         "@monstermann/eslint-config": "^0.5.0",
         "@monstermann/vitepress-theme": "^0.2.0",
-        "@sindresorhus/tsconfig": "^7.0.0",
+        "@sindresorhus/tsconfig": "^8.0.0",
         "prompts": "^2.4.2",
         "tsdown": "0.16.8",
         "typescript": "^5.8.3",
@@ -478,7 +478,7 @@
 
     "@shikijs/vscode-textmate": ["@shikijs/vscode-textmate@10.0.2", "", {}, "sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg=="],
 
-    "@sindresorhus/tsconfig": ["@sindresorhus/tsconfig@7.0.0", "", {}, "sha512-i5K04hLAP44Af16zmDjG07E1NHuDgCM07SJAT4gY0LZSRrWYzwt4qkLem6TIbIVh0k51RkN2bF+lP+lM5eC9fw=="],
+    "@sindresorhus/tsconfig": ["@sindresorhus/tsconfig@8.1.0", "", {}, "sha512-MggpguA4jNdtyoUy2Hs54nb4lP4rbhH34CsOiFId1q6fmFPnipqeo70ZRkjp5p4Z7wdyspALtSAcKaxL2/3waQ=="],
 
     "@standard-schema/spec": ["@standard-schema/spec@1.0.0", "", {}, "sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA=="],
 
