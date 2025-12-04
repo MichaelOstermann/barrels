@@ -37,7 +37,7 @@
     "dependencies": {
         "@henrygd/queue": "^1.0.7",
         "@types/node": "^24.0.13",
-        "chokidar": "^4.0.3",
+        "chokidar": "^5.0.0",
         "gunshi": "^0.27.0-alpha.8",
         "ignore": "^7.0.5",
         "oxc-parser": "^0.101.0",
