@@ -14,7 +14,7 @@
         "@monstermann/vitepress-theme": "^0.2.0",
         "@sindresorhus/tsconfig": "^8.0.0",
         "prompts": "^2.4.2",
-        "tsdown": "0.18.1",
+        "tsdown": "0.18.2",
         "typescript": "^5.8.3",
         "vitepress": "^1.6.3",
         "vitepress-plugin-group-icons": "^1.6.1"
