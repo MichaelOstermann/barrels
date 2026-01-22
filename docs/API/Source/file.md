@@ -12,12 +12,12 @@ Constructs a new source representing a file on disk. May return `Promise<undefin
 ## Example
 
 ```ts
-import { Source, Barrel } from "@monstermann/barrels";
+import { Source } from "@monstermann/barrels";
 
 const source = await Source.file("./source.ts");
 
 // export * from "./source.ts"
-Barrel.export(source);
+Source.toExport(source);
 ```
 
 ## Options
@@ -27,14 +27,14 @@ Barrel.export(source);
 Defines the alias that should be used when creating barrels.
 
 ```ts
-import { Source, Barrel } from "@monstermann/barrels";
+import { Source } from "@monstermann/barrels";
 
 const source = await Source.file("source.ts", {
     alias: "bar",
 });
 
-// export * from "./source.ts";
-Barrel.export(source);
+// export * as bar from "./source.ts";
+Source.toExport(source);
 ```
 
 ### type
@@ -42,12 +42,12 @@ Barrel.export(source);
 When enabled, treats this source as a type definition.
 
 ```ts
-import { Source, Barrel } from "@monstermann/barrels";
+import { Source } from "@monstermann/barrels";
 
 const source = await Source.file("source.ts", {
     type: true,
 });
 
 // export type * from "./source.ts";
-Barrel.export(source);
+Source.toExport(source);
 ```

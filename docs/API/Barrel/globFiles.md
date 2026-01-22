@@ -9,7 +9,7 @@ function Barrel.globFiles(
 
 Takes glob patterns and returns a list of files as absolute paths, `options` are forwarded to [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby?tab=readme-ov-file#options).
 
-The result can be passed to [`Source.file`](../Source/file) or [`Source.files`](../Sources/files) to start creating barrel files.
+The result can be passed to [`Source.file`](../Source/file) or [`Sources.files`](../Sources/files) to start creating barrel files.
 
 ## Example
 

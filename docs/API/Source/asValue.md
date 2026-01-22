@@ -9,15 +9,15 @@ Creates a copy of `source` which is treated as a value, instead of a type declar
 ## Example
 
 ```ts
-import { Source, Barrel } from "@monstermann/barrels";
+import { Source } from "@monstermann/barrels";
 
 const sourceA = await Source.file("./source.ts");
 
 // export type * from "./source.ts";
-Barrel.export(sourceA);
+Source.toExport(sourceA);
 
 const sourceB = Source.asValue(sourceA);
 
 // export * from "./source.ts";
-Barrel.export(sourceB);
+Source.toExport(sourceB);
 ```
