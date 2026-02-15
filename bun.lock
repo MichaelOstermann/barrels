@@ -24,7 +24,7 @@
         "@henrygd/queue": "^1.0.7",
         "@types/node": "^25.0.0",
         "chokidar": "^5.0.0",
-        "gunshi": "^0.27.0-alpha.8",
+        "gunshi": "^0.28.0",
         "ignore": "^7.0.5",
         "oxc-parser": "^0.101.0",
         "oxc-resolver": "^11.5.2",
@@ -642,8 +642,6 @@
 
     "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
 
-    "args-tokens": ["args-tokens@0.22.0", "", {}, "sha512-Mt/kcjCV9uROZL0l/8B0Ioxkq6ghe5+rH3osR2eljF0TOJ+piHiA6gnpF8aZLki/TDLS2PFNxhRFwxF9C0xWOw=="],
-
     "ast-kit": ["ast-kit@3.0.0-beta.1", "", { "dependencies": { "@babel/parser": "^8.0.0-beta.4", "estree-walker": "^3.0.3", "pathe": "^2.0.3" } }, "sha512-trmleAnZ2PxN/loHWVhhx1qeOHSRXq4TDsBBxq3GqeJitfk3+jTQ+v/C1km/KYq9M7wKqCewMh+/NAvVH7m+bw=="],
 
     "balanced-match": ["balanced-match@1.0.2", "", {}, "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="],
@@ -880,7 +878,7 @@
 
     "graphemer": ["graphemer@1.4.0", "", {}, "sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag=="],
 
-    "gunshi": ["gunshi@0.27.0-alpha.8", "", { "dependencies": { "args-tokens": "^0.22.0" } }, "sha512-0wPyaDw3z+yna7bOLId/jYvv8SZjeKDAITK/08chZX8FWVr4GwCOFJFN0iXjhEcGK3CaKx7NY770+OXqq0nUwg=="],
+    "gunshi": ["gunshi@0.28.0", "", {}, "sha512-xR/iKAT4zMeYsboTDHOVSEGS1BNyYReUE48vXdNIT6ujcZLqE+BR/p9T6n0N7ugNdfoZtHm3NTuya9jc7cdsbw=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 
