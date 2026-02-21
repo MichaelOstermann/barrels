@@ -24,7 +24,7 @@
         "@henrygd/queue": "^1.0.7",
         "@types/node": "^25.0.0",
         "chokidar": "^5.0.0",
-        "gunshi": "^0.28.0",
+        "gunshi": "^0.29.0",
         "ignore": "^7.0.5",
         "oxc-parser": "^0.101.0",
         "oxc-resolver": "^11.5.2",
@@ -878,7 +878,7 @@
 
     "graphemer": ["graphemer@1.4.0", "", {}, "sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag=="],
 
-    "gunshi": ["gunshi@0.28.0", "", {}, "sha512-xR/iKAT4zMeYsboTDHOVSEGS1BNyYReUE48vXdNIT6ujcZLqE+BR/p9T6n0N7ugNdfoZtHm3NTuya9jc7cdsbw=="],
+    "gunshi": ["gunshi@0.29.2", "", {}, "sha512-tjyVt1vWWOnVUlY+kSqr7evRzl5xVq1ltzILkm7150zBL7VCHYX3OIUrkVOqx8N4fni+yuPrwBRPBl+2FW+C0w=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 

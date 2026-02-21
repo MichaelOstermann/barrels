@@ -38,7 +38,7 @@
         "@henrygd/queue": "^1.0.7",
         "@types/node": "^25.0.0",
         "chokidar": "^5.0.0",
-        "gunshi": "^0.28.0",
+        "gunshi": "^0.29.0",
         "ignore": "^7.0.5",
         "oxc-parser": "^0.101.0",
         "oxc-resolver": "^11.5.2",
