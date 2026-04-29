@@ -67,7 +67,12 @@ export function flat(options: FlatBarrelConfig): () => Promise<void> {
                 .then(sources => Sources.resolveExtensions(sources))
                 .then(sources => Sources.toExports(sources))
 
-            await Barrel.write(outFile, sources)
+            const output = [
+                Barrel.banner,
+                sources,
+            ].join("\n\n")
+
+            await Barrel.write(outFile, output)
         }))
     }
 }
