@@ -1,7 +1,7 @@
 {
     "name": "@monstermann/barrels-treeshake",
     "type": "module",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "Replaces the members of imported namespaces with direct imports.",
     "author": "Michael Ostermann <michaelostermann@me.com>",
     "license": "MIT",
