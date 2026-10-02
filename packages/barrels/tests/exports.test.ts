@@ -25,7 +25,7 @@ describe("readExports", () => {
         ])
     })
 
-    it("should follow relative wildcard exports", async () => {
+    it("should follow relative wildcard exports and skip the ones from packages", async () => {
         expect(await readExports(fixture("Shape/reexports.ts"))).toEqual([
             { isType: true, name: "Unit" },
             { isType: false, name: "defaultUnit" },
