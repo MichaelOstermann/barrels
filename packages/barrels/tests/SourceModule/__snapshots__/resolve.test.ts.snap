@@ -33,9 +33,9 @@ exports[`SourceModule.resolve > should resolve relative external modules 1`] = `
   "allowImportingTsExtensions": undefined,
   "dirPath": "/home/michael/Development/barrels/node_modules/tsconfck/src",
   "extName": "js",
-  "fileName": "./find.js",
+  "fileName": "find",
   "filePath": "/home/michael/Development/barrels/node_modules/tsconfck/src/find.js",
-  "isExternal": true,
+  "isExternal": false,
   "moduleResolution": undefined,
   "tsconfigPath": "",
 }
@@ -59,9 +59,9 @@ exports[`SourceModule.resolve > should resolve tsconfig aliases 1`] = `
   "allowImportingTsExtensions": undefined,
   "dirPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__",
   "extName": "ts",
-  "fileName": "exports",
+  "fileName": "#exports",
   "filePath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/exports.ts",
-  "isExternal": false,
+  "isExternal": true,
   "moduleResolution": "bundler",
   "tsconfigPath": "/home/michael/Development/barrels/packages/barrels/tests/__fixtures__/tsconfig.json",
 }

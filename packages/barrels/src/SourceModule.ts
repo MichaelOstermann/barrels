@@ -186,7 +186,7 @@ export const SourceModule = {
 
         if (!resolved.path) return undefined
 
-        const isExternal = resolved.packageJsonPath?.includes("node_modules") ?? false
+        const isExternal = !path.startsWith(".") && !Path.isAbsolute(path)
         const extName = Path.extname(resolved.path).slice(1)
         const fileName = isExternal ? path : Path.basename(resolved.path, Path.extname(resolved.path))
         const dirPath = Path.dirname(resolved.path)

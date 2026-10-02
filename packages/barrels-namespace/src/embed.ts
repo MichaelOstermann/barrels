@@ -83,10 +83,10 @@ async function collectImports(importNodes: Set<ImportDeclaration>, source: Sourc
     const imports: Source[] = []
     for (const node of importNodes) {
         const module = await SourceModule.resolve(node.source.value, source.module.filePath)
-        if (!module) continue
+            ?? verbatimModule(node.source.value, source.module)
         for (const specifier of node.specifiers) {
             imports.push({
-                alias: "",
+                alias: getAlias(specifier),
                 dirPath: module.dirPath,
                 export: getExport(specifier),
                 extName: module.extName,
@@ -96,6 +96,27 @@ async function collectImports(importNodes: Set<ImportDeclaration>, source: Sourc
         }
     }
     return imports
+}
+
+function verbatimModule(specifier: string, from: SourceModule): SourceModule {
+    return {
+        allowImportingTsExtensions: from.allowImportingTsExtensions,
+        dirPath: "",
+        extName: "",
+        fileName: specifier,
+        filePath: specifier,
+        isExternal: true,
+        moduleResolution: from.moduleResolution,
+        tsconfigPath: from.tsconfigPath,
+    }
+}
+
+function getAlias(node: ImportDeclarationSpecifier): string {
+    if (node.type === "ImportSpecifier") {
+        if (node.imported.type !== "Identifier") return node.local.name
+        return node.imported.name === node.local.name ? "" : node.local.name
+    }
+    return node.local.name
 }
 
 function getExport(node: ImportDeclarationSpecifier): SourceExport | undefined {
