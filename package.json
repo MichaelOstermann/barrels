@@ -4,15 +4,13 @@
     "workspaces": ["packages/*"],
     "scripts": {
         "checks": "bun run eslint && bun run tsc && bun test",
-        "bundles": "bun run --filter '*' bundle",
-        "release": "bun run scripts/release"
+        "bundles": "bun run --filter '*' bundle"
     },
     "devDependencies": {
-        "@monstermann/eslint-config": "^0.7.0",
-        "@sindresorhus/tsconfig": "^8.0.0",
+        "@monstermann/eslint-config": "^0.8.0",
+        "@monstermann/tsconfig": "^0.0.0",
         "@types/bun": "^1.4.2",
-        "prompts": "^2.4.2",
-        "tsdown": "0.21.10",
+        "tsdown": "^0.23.0",
         "typescript": "^6.0.0"
     }
 }

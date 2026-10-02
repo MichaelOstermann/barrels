@@ -1,8 +1,8 @@
 {
-    "name": "@monstermann/tree-shake-import-namespaces",
+    "name": "@monstermann/barrels-treeshake",
     "type": "module",
     "version": "0.4.0",
-    "description": "Tree-shake import namespaces with oxc.",
+    "description": "Replaces the members of imported namespaces with direct imports.",
     "author": "Michael Ostermann <michaelostermann@me.com>",
     "license": "MIT",
     "homepage": "https://github.com/MichaelOstermann/barrels",
@@ -28,14 +28,13 @@
         "dist"
     ],
     "scripts": {
-        "bundle": "tsdown",
-        "release": "bun publish --access public"
+        "bundle": "tsdown"
     },
     "dependencies": {
-        "magic-string": "^0.30.17",
+        "magic-string": "^1.4.2",
         "oxc-parser": "^0.152.0"
     },
     "devDependencies": {
-        "rolldown": "1.0.0-rc.17"
+        "rolldown": "1.2.12"
     }
 }

@@ -15,10 +15,10 @@ describe("namespace", () => {
         expect(barrel!.contents).toMatchSnapshot()
     })
 
-    it("should exclude globs relative to the entry and regular expressions", async () => {
+    it("should exclude globs relative to the entry", async () => {
         const [, barrel] = await namespace({
             entries: Path.join(fixtures, "Shape"),
-            exclude: ["create.ts", /reexports/],
+            exclude: ["create.ts", "re*.ts"],
         })()
         expect(barrel!.contents).not.toContain("create")
         expect(barrel!.contents).not.toContain("Units")

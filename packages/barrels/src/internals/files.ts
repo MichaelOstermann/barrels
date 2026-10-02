@@ -18,20 +18,14 @@ export async function globEntries(entries: BarrelOptions["entries"]): Promise<st
 }
 
 export async function globFiles(entry: string, options: BarrelOptions, ignore: string[]): Promise<string[]> {
-    const exclude = options.exclude === undefined ? [] : [options.exclude].flat()
-    const globs = exclude.filter(pattern => typeof pattern === "string")
-    const regexps = exclude.filter(pattern => typeof pattern !== "string")
-
     const paths = await glob(options.include || ["*.ts", "*.tsx"], {
         absolute: true,
         cwd: entry,
-        ignore: [...ignore, ...globs],
+        ignore: ignore.concat(options.exclude ?? []),
         onlyFiles: true,
     })
 
-    return paths
-        .filter(path => sourceExtensions.includes(Path.extname(path)))
-        .filter(path => !regexps.some(regexp => regexp.test(path)))
+    return paths.filter(path => sourceExtensions.includes(Path.extname(path)))
 }
 
 export function isDeclarationFile(path: string): boolean {

@@ -39,11 +39,11 @@ Configs run one after another, so a barrel can pick up the barrels created befor
 
 `namespace` and `flat` take the same options:
 
-| Option    | Default             | Description                                                                                     |
-| --------- | ------------------- | ----------------------------------------------------------------------------------------------- |
-| `entries` | `process.cwd()`     | Glob(s) to the directories to create barrels in.                                                |
-| `include` | `["*.ts", "*.tsx"]` | Glob(s) to collect files, relative to each entry.                                               |
-| `exclude` |                     | Glob(s), relative to each entry, or RegExp(s), tested against the absolute path, to skip files. |
+| Option    | Default             | Description                                       |
+| --------- | ------------------- | ------------------------------------------------- |
+| `entries` | `process.cwd()`     | Glob(s) to the directories to create barrels in.  |
+| `include` | `["*.ts", "*.tsx"]` | Glob(s) to collect files, relative to each entry. |
+| `exclude` |                     | Glob(s) to skip files, relative to each entry.    |
 
 ## namespace
 
@@ -80,7 +80,7 @@ export { Rect };
 - `export * from "./foo"` is followed for relative paths, the names of `export * from "package"` are not collected.
 - Default exports are skipped.
 
-Use [`@monstermann/tree-shake-import-namespaces`](../tree-shake-import-namespaces) to turn `Rect.area()` into a direct import of `area`.
+Use [`@monstermann/barrels-treeshake`](../barrels-treeshake) to turn `Rect.area()` into a direct import of `area`.
 
 ## flat
 

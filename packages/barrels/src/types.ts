@@ -5,10 +5,10 @@ export interface BarrelOptions {
      */
     entries?: string | string[]
     /**
-     * Glob(s), relative to each entry, or RegExp(s), tested against the absolute path, to exclude matched files.
+     * Glob(s) to exclude files, relative to each entry.
      * @default undefined
      */
-    exclude?: string | RegExp | (string | RegExp)[]
+    exclude?: string | string[]
     /**
      * Glob(s) to collect files, relative to each entry.
      * @default ["*.ts", "*.tsx"]

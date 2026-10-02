@@ -31,8 +31,7 @@
         "dist"
     ],
     "scripts": {
-        "bundle": "tsdown",
-        "release": "bun publish --access public"
+        "bundle": "tsdown"
     },
     "dependencies": {
         "oxc-parser": "^0.152.0",

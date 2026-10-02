@@ -159,7 +159,7 @@ function getAlias(resolved: string, suggested: string): string {
     // Resolvers are expected to use the alias they have been given, avoid parsing in that case.
     if (new RegExp(`(?<![\\w$])${suggested.replaceAll("$", "\\$")}(?![\\w$])`).test(resolved)) return suggested
     const alias = parseSync("import.ts", resolved).module.staticImports.at(-1)?.entries.at(-1)?.localName.value
-    if (!alias) throw new Error(`tree-shake-import-namespaces: Could not extract valid import name from "${resolved}"`)
+    if (!alias) throw new Error(`barrels-treeshake: Could not extract valid import name from "${resolved}"`)
     return alias
 }
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>tree-shake-import-namespaces</h1>
+<h1>barrels-treeshake</h1>
 
 **Replaces the members of imported namespaces with direct imports.**
 
@@ -27,7 +27,7 @@ This makes namespaces, such as the ones created by [`@monstermann/barrels`](../b
 ## Installation
 
 ```sh
-bun add -D @monstermann/tree-shake-import-namespaces
+bun add -D @monstermann/barrels-treeshake
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ bun add -D @monstermann/tree-shake-import-namespaces
 You decide which namespaces are replaced and what they are replaced with: `resolve` is called for each member of an imported namespace and returns the import that should be used instead, or nothing to leave the namespace alone.
 
 ```ts
-import { treeshake } from "@monstermann/tree-shake-import-namespaces";
+import { treeshake } from "@monstermann/barrels-treeshake";
 
 treeshake({
     resolve({ importAlias, importName, importPath, propertyName }) {
@@ -60,55 +60,56 @@ treeshake({
 ### Vite, Rolldown, tsdown
 
 ```ts
-import { treeshake } from "@monstermann/tree-shake-import-namespaces";
+import { treeshake } from "@monstermann/barrels-treeshake";
 
 export default defineConfig({
     plugins: [treeshake({ enforce: "pre", resolve })],
 });
 ```
 
-| Option    | Default        | Description                                                                |
-| --------- | -------------- | -------------------------------------------------------------------------- |
-| `resolve` |                | See above.                                                                 |
-| `include` | `/\.[jt]sx?$/` | RegExp(s), only files whose path matches are transformed.                  |
-| `exclude` |                | RegExp(s), files whose path matches are skipped.                           |
-| `code`    |                | String(s) or RegExp(s), only files containing one of them are transformed. |
-| `enforce` |                | `"pre"` or `"post"`.                                                       |
-| `debug`   | `false`        | `true` or a RegExp matching file paths, prints what is being replaced.     |
-
-Setting `code` to the import path of your namespaces lets the bundler skip all other files without calling the plugin.
+| Option    | Default        | Description                                                            |
+| --------- | -------------- | ---------------------------------------------------------------------- |
+| `resolve` |                | See above.                                                             |
+| `include` | `/\.[jt]sx?$/` | RegExp(s), only files whose path matches are transformed.              |
+| `exclude` |                | RegExp(s), files whose path matches are skipped.                       |
+| `enforce` |                | `"pre"` or `"post"`.                                                   |
+| `debug`   | `false`        | `true` or a RegExp matching file paths, prints what is being replaced. |
 
 ### Bun
 
-`Bun.build` only uses the first `onLoad` that returns something, so plugins that transform the same files have to share one. `bun` runs a list of plugins in a single `onLoad`:
+`Bun.build` only uses the first `onLoad` that returns something, so call `transform` from your own:
 
 ```ts
-import { bun, treeshake } from "@monstermann/tree-shake-import-namespaces";
+import { transform } from "@monstermann/barrels-treeshake";
 
 await Bun.build({
     entrypoints: ["./src/index.ts"],
-    plugins: [bun([treeshake({ resolve }), anotherPlugin()])],
-});
-```
-
-`definePlugin` creates such a plugin from a `transform` function:
-
-```ts
-import { definePlugin } from "@monstermann/tree-shake-import-namespaces";
-
-const plugin = definePlugin({
-    name: "example",
-    filter: { code: "example", include: /\.tsx$/ },
-    transform(code, id) {
-        return { code };
-    },
+    plugins: [
+        {
+            name: "transforms",
+            setup(build) {
+                build.onLoad(
+                    { filter: /\.tsx?$/ },
+                    async ({ loader, path }) => {
+                        const code = await Bun.file(path).text();
+                        return {
+                            contents:
+                                transform(code, path, { resolve })?.code ??
+                                code,
+                            loader,
+                        };
+                    },
+                );
+            },
+        },
+    ],
 });
 ```
 
 ### Standalone
 
 ```ts
-import { transform } from "@monstermann/tree-shake-import-namespaces";
+import { transform } from "@monstermann/barrels-treeshake";
 
 const result = transform(code, "source.ts", { resolve });
 result?.code;
