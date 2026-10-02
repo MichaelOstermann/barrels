@@ -2,8 +2,11 @@
 
 <h1>barrels</h1>
 
-**Tools for creating barrel files.**
-
-[Documentation](https://MichaelOstermann.github.io/barrels)
+**Namespaces as an API style, without the bundle size.**
 
 </div>
+
+| Package                                                                                | Description                                                      |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [`@monstermann/barrels`](./packages/barrels)                                           | Generates namespace and flat barrel files.                       |
+| [`@monstermann/tree-shake-import-namespaces`](./packages/tree-shake-import-namespaces) | Replaces the members of imported namespaces with direct imports. |
