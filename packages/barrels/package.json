@@ -2,10 +2,10 @@
     "name": "@monstermann/barrels",
     "type": "module",
     "version": "0.4.0",
-    "description": "Tools for creating barrel files.",
+    "description": "Generates namespace and flat barrel files.",
     "author": "Michael Ostermann <michaelostermann@me.com>",
     "license": "MIT",
-    "homepage": "https://MichaelOstermann.github.io/barrels",
+    "homepage": "https://github.com/MichaelOstermann/barrels",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/MichaelOstermann/barrels.git"
@@ -35,21 +35,7 @@
         "release": "bun publish --access public"
     },
     "dependencies": {
-        "@henrygd/queue": "^1.0.7",
-        "@types/node": "^25.0.0",
-        "chokidar": "^5.0.0",
-        "gunshi": "^0.29.0",
-        "ignore": "^7.0.5",
-        "oxc-parser": "^0.101.0",
-        "oxc-resolver": "^11.5.2",
-        "oxc-walker": "^0.6.0",
-        "picocolors": "^1.1.1",
-        "tinyglobby": "^0.2.14",
-        "tsconfck": "^3.1.6",
-        "unconfig": "^7.3.2",
-        "unplugin-utils": "^0.3.0"
-    },
-    "devDependencies": {
-        "vitest": "^4.0.0"
+        "oxc-parser": "^0.152.0",
+        "tinyglobby": "^0.2.17"
     }
 }

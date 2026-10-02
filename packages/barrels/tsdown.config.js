@@ -7,7 +7,7 @@ export default [
     }),
     defineConfig({
         dts: false,
-        entry: ["./src/bin/cli.ts"],
+        entry: ["./src/cli.ts"],
         unbundle: true,
         outputOptions: {
             banner: "#!/usr/bin/env node",
