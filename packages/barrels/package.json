@@ -34,7 +34,7 @@
         "bundle": "tsdown"
     },
     "dependencies": {
-        "oxc-parser": "^0.152.0",
+        "oxc-parser": "^0.153.0",
         "tinyglobby": "^0.2.17"
     }
 }
